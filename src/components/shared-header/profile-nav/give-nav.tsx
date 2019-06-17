@@ -35,7 +35,7 @@ export class GiveMenu {
                     if (typeof el != 'string')
                       return (
                         <li class={topLevel ? '' : 'top-level'}>
-                          <a href={el.path} automation-id={el['automation-id']}> {el.title}</a>
+                          <a href={el.path} data-automation-id={el['automation-id']}> {el.title}</a>
                         </li>
                       );
                   })}
