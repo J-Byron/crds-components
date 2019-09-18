@@ -15,6 +15,7 @@ export declare class Auth {
     signOut(callback: any): void;
     private updateCurrentUser;
     private getUserId;
-    private getUserName;
+    private getUser;
     private getUserImageUrl;
+    static getMPIssuerEndpoint(env: any): string;
 }

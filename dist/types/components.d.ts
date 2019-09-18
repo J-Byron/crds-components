@@ -9,6 +9,20 @@ import { HTMLStencilElement, JSXBase } from './stencil.core';
 
 
 export namespace Components {
+  interface CrdsDefaultLayout {
+    'body': string;
+    'heading': string;
+    'image': string;
+    'meta': string;
+    'metaPosition': string;
+    'src': string;
+    'thumbnailSRC': string;
+    'url': string;
+  }
+  interface CrdsGreeting {
+    'authToken': string;
+    'defaultName': string;
+  }
   interface CrdsHeartButton {
     /**
     * Unique identifier for likeable resource
@@ -27,10 +41,38 @@ export namespace Components {
     */
     'storageKey': string;
   }
+  interface CrdsIcon {
+    'color': string;
+    'name': string;
+    'size': string;
+  }
+  interface CrdsImage {
+    'size': string;
+    'src': string;
+  }
+  interface CrdsMediaCard {
+    'author': string;
+    'body': string;
+    'buttonSrc': string;
+    'contentCount': number;
+    'contentLayout': string;
+    'contentType': string;
+    'heading': string;
+    'imageSrc': string;
+    'mediaTopic': string;
+    'meta': string;
+    'metaPosition': string;
+    'nearestMinute': string;
+    'thumbnailSrc': string;
+    'url': string;
+  }
   interface CrdsModal {
     'isActive': boolean;
     'label': string;
     'onModalClose': Function;
+  }
+  interface CrdsRecommendedContent {
+    'authToken': string;
   }
   interface CrdsSharedFooter {
     'env': string;
@@ -39,6 +81,9 @@ export namespace Components {
   interface CrdsSharedHeader {
     'env': string;
     'src': string;
+  }
+  interface CrdsSiteHappenings {
+    'authToken': string;
   }
   interface CrdsSnailTrail {
     'env': string;
@@ -74,6 +119,11 @@ export namespace Components {
     'data': string;
     'href': string;
   }
+  interface NavLink {
+    'automationId': string;
+    'handleSignOut': Function;
+    'href': string;
+  }
   interface NavSection {
     'activeSection': any;
     'isActive': boolean;
@@ -86,10 +136,9 @@ export namespace Components {
     'slug': string;
   }
   interface ProfileNav {
-    'config': any;
     'currentUser': any;
     'data': JSON;
-    'onSignOut': Function;
+    'handleSignOut': Function;
     'profileNavIsShowing': boolean;
   }
 }
@@ -97,16 +146,52 @@ export namespace Components {
 declare global {
 
 
+  interface HTMLCrdsDefaultLayoutElement extends Components.CrdsDefaultLayout, HTMLStencilElement {}
+  var HTMLCrdsDefaultLayoutElement: {
+    prototype: HTMLCrdsDefaultLayoutElement;
+    new (): HTMLCrdsDefaultLayoutElement;
+  };
+
+  interface HTMLCrdsGreetingElement extends Components.CrdsGreeting, HTMLStencilElement {}
+  var HTMLCrdsGreetingElement: {
+    prototype: HTMLCrdsGreetingElement;
+    new (): HTMLCrdsGreetingElement;
+  };
+
   interface HTMLCrdsHeartButtonElement extends Components.CrdsHeartButton, HTMLStencilElement {}
   var HTMLCrdsHeartButtonElement: {
     prototype: HTMLCrdsHeartButtonElement;
     new (): HTMLCrdsHeartButtonElement;
   };
 
+  interface HTMLCrdsIconElement extends Components.CrdsIcon, HTMLStencilElement {}
+  var HTMLCrdsIconElement: {
+    prototype: HTMLCrdsIconElement;
+    new (): HTMLCrdsIconElement;
+  };
+
+  interface HTMLCrdsImageElement extends Components.CrdsImage, HTMLStencilElement {}
+  var HTMLCrdsImageElement: {
+    prototype: HTMLCrdsImageElement;
+    new (): HTMLCrdsImageElement;
+  };
+
+  interface HTMLCrdsMediaCardElement extends Components.CrdsMediaCard, HTMLStencilElement {}
+  var HTMLCrdsMediaCardElement: {
+    prototype: HTMLCrdsMediaCardElement;
+    new (): HTMLCrdsMediaCardElement;
+  };
+
   interface HTMLCrdsModalElement extends Components.CrdsModal, HTMLStencilElement {}
   var HTMLCrdsModalElement: {
     prototype: HTMLCrdsModalElement;
     new (): HTMLCrdsModalElement;
+  };
+
+  interface HTMLCrdsRecommendedContentElement extends Components.CrdsRecommendedContent, HTMLStencilElement {}
+  var HTMLCrdsRecommendedContentElement: {
+    prototype: HTMLCrdsRecommendedContentElement;
+    new (): HTMLCrdsRecommendedContentElement;
   };
 
   interface HTMLCrdsSharedFooterElement extends Components.CrdsSharedFooter, HTMLStencilElement {}
@@ -119,6 +204,12 @@ declare global {
   var HTMLCrdsSharedHeaderElement: {
     prototype: HTMLCrdsSharedHeaderElement;
     new (): HTMLCrdsSharedHeaderElement;
+  };
+
+  interface HTMLCrdsSiteHappeningsElement extends Components.CrdsSiteHappenings, HTMLStencilElement {}
+  var HTMLCrdsSiteHappeningsElement: {
+    prototype: HTMLCrdsSiteHappeningsElement;
+    new (): HTMLCrdsSiteHappeningsElement;
   };
 
   interface HTMLCrdsSnailTrailElement extends Components.CrdsSnailTrail, HTMLStencilElement {}
@@ -157,6 +248,12 @@ declare global {
     new (): HTMLNavCtasElement;
   };
 
+  interface HTMLNavLinkElement extends Components.NavLink, HTMLStencilElement {}
+  var HTMLNavLinkElement: {
+    prototype: HTMLNavLinkElement;
+    new (): HTMLNavLinkElement;
+  };
+
   interface HTMLNavSectionElement extends Components.NavSection, HTMLStencilElement {}
   var HTMLNavSectionElement: {
     prototype: HTMLNavSectionElement;
@@ -175,16 +272,24 @@ declare global {
     new (): HTMLProfileNavElement;
   };
   interface HTMLElementTagNameMap {
+    'crds-default-layout': HTMLCrdsDefaultLayoutElement;
+    'crds-greeting': HTMLCrdsGreetingElement;
     'crds-heart-button': HTMLCrdsHeartButtonElement;
+    'crds-icon': HTMLCrdsIconElement;
+    'crds-image': HTMLCrdsImageElement;
+    'crds-media-card': HTMLCrdsMediaCardElement;
     'crds-modal': HTMLCrdsModalElement;
+    'crds-recommended-content': HTMLCrdsRecommendedContentElement;
     'crds-shared-footer': HTMLCrdsSharedFooterElement;
     'crds-shared-header': HTMLCrdsSharedHeaderElement;
+    'crds-site-happenings': HTMLCrdsSiteHappeningsElement;
     'crds-snail-trail': HTMLCrdsSnailTrailElement;
     'crds-snail-trail-link': HTMLCrdsSnailTrailLinkElement;
     'crds-subscribe': HTMLCrdsSubscribeElement;
     'give-nav': HTMLGiveNavElement;
     'global-nav': HTMLGlobalNavElement;
     'nav-ctas': HTMLNavCtasElement;
+    'nav-link': HTMLNavLinkElement;
     'nav-section': HTMLNavSectionElement;
     'nav-section-subnav': HTMLNavSectionSubnavElement;
     'profile-nav': HTMLProfileNavElement;
@@ -192,6 +297,20 @@ declare global {
 }
 
 declare namespace LocalJSX {
+  interface CrdsDefaultLayout extends JSXBase.HTMLAttributes<HTMLCrdsDefaultLayoutElement> {
+    'body'?: string;
+    'heading'?: string;
+    'image'?: string;
+    'meta'?: string;
+    'metaPosition'?: string;
+    'src'?: string;
+    'thumbnailSRC'?: string;
+    'url'?: string;
+  }
+  interface CrdsGreeting extends JSXBase.HTMLAttributes<HTMLCrdsGreetingElement> {
+    'authToken'?: string;
+    'defaultName'?: string;
+  }
   interface CrdsHeartButton extends JSXBase.HTMLAttributes<HTMLCrdsHeartButtonElement> {
     /**
     * Unique identifier for likeable resource
@@ -210,10 +329,38 @@ declare namespace LocalJSX {
     */
     'storageKey'?: string;
   }
+  interface CrdsIcon extends JSXBase.HTMLAttributes<HTMLCrdsIconElement> {
+    'color'?: string;
+    'name'?: string;
+    'size'?: string;
+  }
+  interface CrdsImage extends JSXBase.HTMLAttributes<HTMLCrdsImageElement> {
+    'size'?: string;
+    'src'?: string;
+  }
+  interface CrdsMediaCard extends JSXBase.HTMLAttributes<HTMLCrdsMediaCardElement> {
+    'author'?: string;
+    'body'?: string;
+    'buttonSrc'?: string;
+    'contentCount'?: number;
+    'contentLayout'?: string;
+    'contentType'?: string;
+    'heading'?: string;
+    'imageSrc'?: string;
+    'mediaTopic'?: string;
+    'meta'?: string;
+    'metaPosition'?: string;
+    'nearestMinute'?: string;
+    'thumbnailSrc'?: string;
+    'url'?: string;
+  }
   interface CrdsModal extends JSXBase.HTMLAttributes<HTMLCrdsModalElement> {
     'isActive'?: boolean;
     'label'?: string;
     'onModalClose'?: Function;
+  }
+  interface CrdsRecommendedContent extends JSXBase.HTMLAttributes<HTMLCrdsRecommendedContentElement> {
+    'authToken'?: string;
   }
   interface CrdsSharedFooter extends JSXBase.HTMLAttributes<HTMLCrdsSharedFooterElement> {
     'env'?: string;
@@ -222,6 +369,9 @@ declare namespace LocalJSX {
   interface CrdsSharedHeader extends JSXBase.HTMLAttributes<HTMLCrdsSharedHeaderElement> {
     'env'?: string;
     'src'?: string;
+  }
+  interface CrdsSiteHappenings extends JSXBase.HTMLAttributes<HTMLCrdsSiteHappeningsElement> {
+    'authToken'?: string;
   }
   interface CrdsSnailTrail extends JSXBase.HTMLAttributes<HTMLCrdsSnailTrailElement> {
     'env'?: string;
@@ -257,6 +407,11 @@ declare namespace LocalJSX {
     'data'?: string;
     'href'?: string;
   }
+  interface NavLink extends JSXBase.HTMLAttributes<HTMLNavLinkElement> {
+    'automationId'?: string;
+    'handleSignOut'?: Function;
+    'href'?: string;
+  }
   interface NavSection extends JSXBase.HTMLAttributes<HTMLNavSectionElement> {
     'activeSection'?: any;
     'isActive'?: boolean;
@@ -269,24 +424,31 @@ declare namespace LocalJSX {
     'slug'?: string;
   }
   interface ProfileNav extends JSXBase.HTMLAttributes<HTMLProfileNavElement> {
-    'config'?: any;
     'currentUser'?: any;
     'data'?: JSON;
-    'onSignOut'?: Function;
+    'handleSignOut'?: Function;
     'profileNavIsShowing'?: boolean;
   }
 
   interface IntrinsicElements {
+    'crds-default-layout': CrdsDefaultLayout;
+    'crds-greeting': CrdsGreeting;
     'crds-heart-button': CrdsHeartButton;
+    'crds-icon': CrdsIcon;
+    'crds-image': CrdsImage;
+    'crds-media-card': CrdsMediaCard;
     'crds-modal': CrdsModal;
+    'crds-recommended-content': CrdsRecommendedContent;
     'crds-shared-footer': CrdsSharedFooter;
     'crds-shared-header': CrdsSharedHeader;
+    'crds-site-happenings': CrdsSiteHappenings;
     'crds-snail-trail': CrdsSnailTrail;
     'crds-snail-trail-link': CrdsSnailTrailLink;
     'crds-subscribe': CrdsSubscribe;
     'give-nav': GiveNav;
     'global-nav': GlobalNav;
     'nav-ctas': NavCtas;
+    'nav-link': NavLink;
     'nav-section': NavSection;
     'nav-section-subnav': NavSectionSubnav;
     'profile-nav': ProfileNav;

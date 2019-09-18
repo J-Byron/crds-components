@@ -10,7 +10,7 @@ export declare class SharedHeader {
     /**
      * Fires before render...
      */
-    componentWillLoad(): void;
+    componentWillLoad(): Promise<any>;
     componentDidLoad(): void;
     /**
      * Section onClick event handler
