@@ -7,6 +7,7 @@ export class Auth {
             prod: 'www'
         };
         this.config = config;
+        this.analytics = window['analytics'] || {};
         const oktaConfig = {
             clientId: config.okta_client_id,
             issuer: config.okta_issuer,
@@ -16,7 +17,8 @@ export class Auth {
         };
         const mpConfig = {
             accessTokenCookie: config.mp_access_token_cookie,
-            refreshTokenCookie: config.mp_refresh_token_cookie
+            refreshTokenCookie: config.mp_refresh_token_cookie,
+            issuer: Auth.getMPIssuerEndpoint(this.config.env)
         };
         const authConfig = {
             oktaConfig: oktaConfig,
@@ -24,7 +26,6 @@ export class Auth {
             logging: config.logging || false,
             providerPreference: [CrdsAuthenticationProviders.Okta, CrdsAuthenticationProviders.Mp]
         };
-        console.log(authConfig);
         this.authService = new CrdsAuthenticationService(authConfig);
     }
     listen(callback) {
@@ -54,9 +55,15 @@ export class Auth {
     updateCurrentUser() {
         if (!this.authenticated)
             return (this.currentUser = null);
+        const userId = this.getUserId();
+        const userName = this.getUser();
+        if (this.analytics)
+            this.analytics.identify(userId, {
+                name: userName
+            });
         return (this.currentUser = {
-            id: this.getUserId(),
-            name: this.getUserName(),
+            id: userId,
+            name: userName,
             avatarUrl: this.getUserImageUrl()
         });
     }
@@ -68,7 +75,7 @@ export class Auth {
         if (this.isMp)
             return Utils.getCookie('userId');
     }
-    getUserName() {
+    getUser() {
         if (!this.authenticated)
             return null;
         if (this.isOkta)
@@ -84,5 +91,9 @@ export class Auth {
             return null;
         const subdomain = Utils.getSubdomain(this.config.env);
         return `https://${subdomain}.crossroads.net/proxy/gateway/api/image/profile/${userId}`;
+    }
+    static getMPIssuerEndpoint(env) {
+        const subdomain = env == 'int' || env == 'demo' ? env : '';
+        return `https://gateway${subdomain}.crossroads.net/gateway/api/login`;
     }
 }

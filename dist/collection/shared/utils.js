@@ -44,4 +44,34 @@ export class Utils {
         };
         return subdomainMap[env] || env;
     }
+    /**
+     * Swaps the Contentful domain for Imgix on images
+     * @param {String} url
+     */
+    static imgixify(url) {
+        const ctflDomain = 'images.ctfassets.net/y3a9myzsdjan';
+        const imgixDomain = 'crds-media.imgix.net';
+        return url.replace(ctflDomain, imgixDomain);
+    }
+    /**
+     *  Adds tracking analytics for when the component comes in view
+     *  @param {HTMLElement} host
+     *  @param {string} componentName
+     *  @param {function} dataFetch
+     */
+    static trackInView(host, componentName, dataFetch) {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    window['analytics'].track(`${componentName}InView`, {
+                        target: entry.target,
+                        data: dataFetch()
+                    });
+                }
+            });
+        }, {
+            threshold: 1.0
+        });
+        observer.observe(host);
+    }
 }
