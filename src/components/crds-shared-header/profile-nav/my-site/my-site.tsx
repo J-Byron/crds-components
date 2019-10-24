@@ -30,6 +30,7 @@ export class MySite {
   private directionsUrl: string;
   private displaySite: Site;
   private mutationObserver: MutationObserver;
+  private analytics = window['analytics'] || {};
 
   @Prop() authToken: string;
   @Prop() defaultName: string;
@@ -175,6 +176,17 @@ export class MySite {
     console.error(err);
   }
 
+  private callAnalytics(actionName, props) {
+    try {
+      this.analytics.track(actionName, {
+        event: props,
+        user: this.user || "logged out user",
+      });
+    } catch (error) {
+      this.logError(error);
+    }
+  }
+
   private disablePrompts(): void {
     this.handlePopperClose();
     this.promptsDisabled = true;
@@ -204,6 +216,7 @@ export class MySite {
     Utils.setCookie('promptedLocation', 'true', 1);
     return this.getCurrentPosition()
       .then((position: any) => {
+        this.callAnalytics('LocationPrompt_MySite', { selection: "allowed" });
         return this.apolloClient
           .query({
             variables: { lat: position.coords.latitude, lng: position.coords.longitude },
@@ -220,6 +233,7 @@ export class MySite {
           });
       })
       .catch(err => {
+        this.callAnalytics('LocationPrompt_MySite', { selection: "denied" });
         this.logError(err);
       });
   }
