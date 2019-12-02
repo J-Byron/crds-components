@@ -101,6 +101,7 @@ export namespace Components {
   }
   interface CrdsProfilePicUploader {
     'onSave': Function;
+    'src': string;
   }
   interface CrdsRecommendedContent {}
   interface CrdsSharedFooter {
@@ -488,6 +489,7 @@ declare namespace LocalJSX {
   }
   interface CrdsProfilePicUploader {
     'onSave'?: Function;
+    'src'?: string;
   }
   interface CrdsRecommendedContent {}
   interface CrdsSharedFooter {
