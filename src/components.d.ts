@@ -99,6 +99,9 @@ export namespace Components {
     'label': string;
     'onModalClose': Function;
   }
+  interface CrdsProfilePicUploader {
+    'onSave': Function;
+  }
   interface CrdsRecommendedContent {}
   interface CrdsSharedFooter {
     'env': string;
@@ -247,6 +250,12 @@ declare global {
     new (): HTMLCrdsModalElement;
   };
 
+  interface HTMLCrdsProfilePicUploaderElement extends Components.CrdsProfilePicUploader, HTMLStencilElement {}
+  var HTMLCrdsProfilePicUploaderElement: {
+    prototype: HTMLCrdsProfilePicUploaderElement;
+    new (): HTMLCrdsProfilePicUploaderElement;
+  };
+
   interface HTMLCrdsRecommendedContentElement extends Components.CrdsRecommendedContent, HTMLStencilElement {}
   var HTMLCrdsRecommendedContentElement: {
     prototype: HTMLCrdsRecommendedContentElement;
@@ -367,6 +376,7 @@ declare global {
     'crds-label': HTMLCrdsLabelElement;
     'crds-media-card': HTMLCrdsMediaCardElement;
     'crds-modal': HTMLCrdsModalElement;
+    'crds-profile-pic-uploader': HTMLCrdsProfilePicUploaderElement;
     'crds-recommended-content': HTMLCrdsRecommendedContentElement;
     'crds-shared-footer': HTMLCrdsSharedFooterElement;
     'crds-shared-header': HTMLCrdsSharedHeaderElement;
@@ -476,6 +486,9 @@ declare namespace LocalJSX {
     'label'?: string;
     'onModalClose'?: Function;
   }
+  interface CrdsProfilePicUploader {
+    'onSave'?: Function;
+  }
   interface CrdsRecommendedContent {}
   interface CrdsSharedFooter {
     'env'?: string;
@@ -562,6 +575,7 @@ declare namespace LocalJSX {
     'crds-label': CrdsLabel;
     'crds-media-card': CrdsMediaCard;
     'crds-modal': CrdsModal;
+    'crds-profile-pic-uploader': CrdsProfilePicUploader;
     'crds-recommended-content': CrdsRecommendedContent;
     'crds-shared-footer': CrdsSharedFooter;
     'crds-shared-header': CrdsSharedHeader;
@@ -601,6 +615,7 @@ declare module "@stencil/core" {
       'crds-label': LocalJSX.CrdsLabel & JSXBase.HTMLAttributes<HTMLCrdsLabelElement>;
       'crds-media-card': LocalJSX.CrdsMediaCard & JSXBase.HTMLAttributes<HTMLCrdsMediaCardElement>;
       'crds-modal': LocalJSX.CrdsModal & JSXBase.HTMLAttributes<HTMLCrdsModalElement>;
+      'crds-profile-pic-uploader': LocalJSX.CrdsProfilePicUploader & JSXBase.HTMLAttributes<HTMLCrdsProfilePicUploaderElement>;
       'crds-recommended-content': LocalJSX.CrdsRecommendedContent & JSXBase.HTMLAttributes<HTMLCrdsRecommendedContentElement>;
       'crds-shared-footer': LocalJSX.CrdsSharedFooter & JSXBase.HTMLAttributes<HTMLCrdsSharedFooterElement>;
       'crds-shared-header': LocalJSX.CrdsSharedHeader & JSXBase.HTMLAttributes<HTMLCrdsSharedHeaderElement>;
