@@ -43,8 +43,8 @@ export class CrdsModal {
     const { uploadedImgUrl } = this;
 
     return (
-      <div class="form-container">
-        <div id="image-container">
+      <div class="profile-pic-cropper__container">
+        <div class="image-container">
           <img class="cropper-hidden" ref={el => (this.cropperImage = el as HTMLImageElement)} id="cropper" src={this.uploadedImgUrl}/>
         </div>
         <input type="file" name="pic" accept="image/*" onChange={(e) => this.handleImageSelection(e.target.files)}/>

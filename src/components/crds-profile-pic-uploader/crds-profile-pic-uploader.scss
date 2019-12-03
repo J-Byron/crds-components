@@ -12,9 +12,14 @@ img {
   max-width: 100%;
 }
 
-#image-container{
+.image-container{
   width: 400px;
   height: 300px;
+}
+
+.profile-pic-cropper__container{
+   box-shadow: 4px 4px 26px -6px rgba(117,111,117,1);
+   padding: 20px;
 }
 
 .cropper-point:not(.point-se){
