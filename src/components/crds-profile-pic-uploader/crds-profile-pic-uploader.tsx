@@ -17,10 +17,12 @@ export class CrdsModal {
   // @Element() element: HTMLElement;
   private cropperImage: HTMLImageElement;
 
-  componentDidLoad(){
+  componentDidUpdate(){
+    // when the user uploads an image (and state is updated), render the cropper
     this.renderCropper();
   }
 
+  // function to detect the uploaded image element and apply the cropper to it
   renderCropper(){
     const image = this.cropperImage;
     const cropper = new Cropper(image, {
@@ -33,17 +35,8 @@ export class CrdsModal {
   }
 
   handleImageSelection(selectorFiles: FileList){
+      // when the user uploads an image, set it in state
       this.uploadedImgUrl = URL.createObjectURL(selectorFiles[0]);
-      setTimeout(function(){
-        const image = this.cropperImage;
-         debugger
-        const cropper = new Cropper(image, {
-        aspectRatio: 1/1,
-         viewMode: 2,
-          crop(event) {
-            console.log(event.detail.x);
-          },
-        });; }, 1000);
   }
 
   render() {
@@ -52,10 +45,9 @@ export class CrdsModal {
     return (
       <div class="form-container">
         <div id="image-container">
-          <img class="cropper-hidden" ref={el => (this.cropperImage = el as HTMLImageElement)} id="cropper" src={`${uploadedImgUrl? uploadedImgUrl : 'https://crds-media.imgix.net/4CWCvxN6iSb0QXDqvaT9Gt/a80cfd9a0b8154874777cbd71da59175/shutterstock_403980601.jpg?auto=format,compress&w=360&h=202.5&fit=crop' }`}/>
+          <img class="cropper-hidden" ref={el => (this.cropperImage = el as HTMLImageElement)} id="cropper" src={this.uploadedImgUrl}/>
         </div>
         <input type="file" name="pic" accept="image/*" onChange={(e) => this.handleImageSelection(e.target.files)}/>
-        <img src={this.uploadedImgUrl}/>
       </div>
 
     );
