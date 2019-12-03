@@ -1,7 +1,17 @@
+@import "../../../node_modules/cropperjs/src/css/cropper.css";
+@import "../../../node_modules/cropperjs/src/css/cropper.scss";
+@import "../../../node_modules/cropperjs/src/index.scss";
+
+
+
 /* Ensure the size of the image fit the container perfectly */
 img {
   display: block;
 
   /* This rule is very important, please don't ignore this */
   max-width: 100%;
+}
+
+#image-container{
+  width: 300px;
 }
