@@ -25,13 +25,15 @@ export class CrdsModal {
   // function to detect the uploaded image element and apply the cropper to it
   renderCropper(){
     const image = this.cropperImage;
-    const cropper = new Cropper(image, {
-    aspectRatio: 1/1,
-     viewMode: 2,
-      crop(event) {
-        console.log(event.detail.x);
-      },
-    });
+
+      const cropper = new Cropper(image, {
+        aspectRatio: 1/1,
+        viewMode: 2,
+        crop(event) {
+          console.log(event.detail.x);
+        },
+      });
+      cropper.replace(image.src)
   }
 
   handleImageSelection(selectorFiles: FileList){
@@ -47,7 +49,10 @@ export class CrdsModal {
         <div class="image-container">
           <img class="cropper-hidden" ref={el => (this.cropperImage = el as HTMLImageElement)} id="cropper" src={this.uploadedImgUrl}/>
         </div>
-        <input type="file" name="pic" accept="image/*" onChange={(e) => this.handleImageSelection(e.target.files)}/>
+        <div class="choose-file__container">
+          <input type="file" name="pic" accept="image/*" onChange={(e) => this.handleImageSelection(e.target.files)}/>
+          <crds-button color="blue" text="Save photo"></crds-button>
+        </div>
       </div>
 
     );
