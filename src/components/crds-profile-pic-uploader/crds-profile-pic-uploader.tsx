@@ -17,6 +17,7 @@ export class CrdsModal {
   @State() cropper: object;
   // @Element() element: HTMLElement;
   private cropperImage: HTMLImageElement;
+  private fileSelectorInput: HTMLInputElement;
 
   componentDidUpdate(){
     // when the user uploads an image (and state is updated), render the cropper
@@ -65,32 +66,25 @@ export class CrdsModal {
       this.uploadedImgUrl = URL.createObjectURL(selectorFiles[0]);
   }
 
+  triggerFileSelector(){
+    this.fileSelectorInput.click()
+  }
+
   render() {
-    const { uploadedImgUrl } = this;
+    const { uploadedImgUrl, cropper } = this;
 
     return (
       <div class="profile-pic-cropper__container">
         <div class="image-container">
           <img class="cropper-hidden" ref={el => (this.cropperImage = el as HTMLImageElement)} id="cropper" src={this.uploadedImgUrl}/>
+          <img class={`placeholder-img ${cropper? 'cropper-hidden' : '' }`} id="placeholder" src="https://discountdoorhardware.ca/wp-content/uploads/2018/06/profile-placeholder-3.jpg"/>
         </div>
         <div class="choose-file__container">
-          <input type="file" name="pic" accept="image/*" onChange={(e) => this.handleImageSelection(e.target.files)}/>
+          <crds-button color="blue" type="outline" text="Choose file" onClick={() => {this.triggerFileSelector()}}></crds-button>
+          <input type="file" name="pic" accept="image/*" ref={el => (this.fileSelectorInput = el as HTMLInputElement)} onChange={(e) => this.handleImageSelection(e.target.files)}/>
           <crds-button color="blue" text="Save photo"></crds-button>
         </div>
-        <form class="md-form">
-          <div class="file-field">
-            <div class="btn btn-primary btn-sm float-left">
-              <span>Choose file</span>
-              <input type="file" name="pic" accept="image/*"/>
-            </div>
-            <div class="file-path-wrapper">
-            <input class="file-path validate" type="text" placeholder="Upload your file"/>
-            
-            </div>
-          </div>
-        </form>
       </div>
-
     );
   }
 }
