@@ -9,13 +9,10 @@ import Cropper from 'cropperjs';
   shadow: true
 })
 
-
-
 export class CrdsModal {
   @Prop() onSave: Function;
   @State() uploadedImgUrl: string;
   @State() cropper: object;
-  // @Element() element: HTMLElement;
   private cropperImage: HTMLImageElement;
   private fileSelectorInput: HTMLInputElement;
 
@@ -66,8 +63,23 @@ export class CrdsModal {
       this.uploadedImgUrl = URL.createObjectURL(selectorFiles[0]);
   }
 
+  // function to trigger hidden file-selector input from a custom styled button
   triggerFileSelector(){
     this.fileSelectorInput.click()
+  }
+
+  handleSavePhoto(){
+    debugger
+  }
+
+  checkToShowPlaceholderImage(){
+    if (this.cropper){
+      return false
+    } else {
+      // need to put code here to check if user has a current profile picture
+      // check if user has profile picture, if not, return true / show placeholder image
+      return true
+    }
   }
 
   render() {
@@ -77,12 +89,12 @@ export class CrdsModal {
       <div class="profile-pic-cropper__container">
         <div class="image-container">
           <img class="cropper-hidden" ref={el => (this.cropperImage = el as HTMLImageElement)} id="cropper" src={this.uploadedImgUrl}/>
-          <img class={`placeholder-img ${cropper? 'cropper-hidden' : '' }`} id="placeholder" src="https://discountdoorhardware.ca/wp-content/uploads/2018/06/profile-placeholder-3.jpg"/>
+          <img class={`placeholder-img ${!this.checkToShowPlaceholderImage() ? 'cropper-hidden' : '' }`} id="placeholder" src="https://discountdoorhardware.ca/wp-content/uploads/2018/06/profile-placeholder-3.jpg"/>
         </div>
         <div class="choose-file__container">
           <crds-button color="blue" type="outline" text="Choose file" onClick={() => {this.triggerFileSelector()}}></crds-button>
           <input type="file" name="pic" accept="image/*" ref={el => (this.fileSelectorInput = el as HTMLInputElement)} onChange={(e) => this.handleImageSelection(e.target.files)}/>
-          <crds-button color="blue" text="Save photo"></crds-button>
+          <crds-button color="blue" text="Save photo" onClick={() => this.handleSavePhoto()}></crds-button>
         </div>
       </div>
     );

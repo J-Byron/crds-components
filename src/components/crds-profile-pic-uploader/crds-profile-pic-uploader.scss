@@ -54,3 +54,42 @@ input[type="file" i]{
   margin-left: auto;
   margin-right: auto;
 }
+
+.cropper-dashed.dashed-v, .cropper-dashed.dashed-h {
+    display: none;
+  }
+
+.cropper-center::before {
+    height: 2px;
+    left: -9px;
+    top: 0;
+    width: 20px;
+}
+.cropper-center::after {
+    height: 20px;
+    left: 0;
+    top: -10px;
+    width: 2px;
+}
+
+.cropper-view-box {
+    outline: 4px solid #0095D9;
+    outline-color: #0095D9;
+}
+
+span.cropper-point.point-e, span.cropper-point.point-n, span.cropper-point.point-w, span.cropper-point.point-s{
+  display: none !important;
+}
+
+.cropper-point {
+    background-color: #fff;
+    height: 15px;
+    opacity: 1;
+    width: 15px;
+}
+
+.cropper-point.point-nw, .cropper-point.point-ne, .cropper-point.point-sw, .cropper-point.point-se {
+    // left: -8px;
+    // top: -8px;
+    display: none;
+}
