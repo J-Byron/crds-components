@@ -26,24 +26,38 @@ export class CrdsModal {
   // function to detect the uploaded image element and apply the cropper to it
   renderCropper(){
     let isCropperAlreadyInitiated = false;
+    const image = this.cropperImage;
 
+    // if a cropper instance already exists, just replace the image src it uses
     if (this.cropper !== undefined){
       isCropperAlreadyInitiated = true;
     };
-    const image = this.cropperImage;
 
+    // if no cropper instance exists, create one
     if (!isCropperAlreadyInitiated){
-      const cropper = new Cropper(image, {
-        aspectRatio: 1/1,
-        viewMode: 2,
-        crop(event) {
-          console.log(event.detail.x);
-        },
-      });
-      this.cropper = cropper;
+      this.initiateCropper(image)
     } else {
-      this.cropper.replace(image.src)
+      // otherwise, if cropper instance already exists, just replace the image src
+      this.replaceCropperImageSrc(image.src)
     }
+  }
+
+  // function to create a new cropperJS instance if one does not yet exist
+  initiateCropper(image){
+    const cropper = new Cropper(image, {
+      aspectRatio: 1/1,
+      viewMode: 2,
+      crop(event) {
+        console.log(event.detail.x);
+      },
+    });
+    // set this cropper instance in state
+    this.cropper = cropper;
+  }
+
+  // cropper to change the imgSrc on an already initiated cropperJS instance
+  replaceCropperImageSrc(imgSrc){
+    this.cropper.replace(imgSrc)
   }
 
   handleImageSelection(selectorFiles: FileList){
@@ -63,6 +77,18 @@ export class CrdsModal {
           <input type="file" name="pic" accept="image/*" onChange={(e) => this.handleImageSelection(e.target.files)}/>
           <crds-button color="blue" text="Save photo"></crds-button>
         </div>
+        <form class="md-form">
+          <div class="file-field">
+            <div class="btn btn-primary btn-sm float-left">
+              <span>Choose file</span>
+              <input type="file" name="pic" accept="image/*"/>
+            </div>
+            <div class="file-path-wrapper">
+            <input class="file-path validate" type="text" placeholder="Upload your file"/>
+            
+            </div>
+          </div>
+        </form>
       </div>
 
     );
