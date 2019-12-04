@@ -1,4 +1,4 @@
-import { Component, Prop, Element, h } from '@stencil/core';
+import { Component, Prop, State, Element, h } from '@stencil/core';
 import Cropper from 'cropperjs';
 import icon from './icons/zoom-in.svg'
 
@@ -14,7 +14,7 @@ export class CrdsModal {
   @Prop() onSave: Function;
   @State() uploadedImgUrl: string;
   @State() finalImgUrl: string;
-  @State() cropper: object;
+  @State() cropper;
   private cropperImage: HTMLImageElement;
   private fileSelectorInput: HTMLInputElement;
 
