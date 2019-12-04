@@ -14,6 +14,7 @@ import Cropper from 'cropperjs';
 export class CrdsModal {
   @Prop() onSave: Function;
   @State() uploadedImgUrl: string;
+  @State() cropper: object;
   // @Element() element: HTMLElement;
   private cropperImage: HTMLImageElement;
 
@@ -24,8 +25,14 @@ export class CrdsModal {
 
   // function to detect the uploaded image element and apply the cropper to it
   renderCropper(){
+    let isCropperAlreadyInitiated = false;
+
+    if (this.cropper !== undefined){
+      isCropperAlreadyInitiated = true;
+    };
     const image = this.cropperImage;
 
+    if (!isCropperAlreadyInitiated){
       const cropper = new Cropper(image, {
         aspectRatio: 1/1,
         viewMode: 2,
@@ -33,7 +40,10 @@ export class CrdsModal {
           console.log(event.detail.x);
         },
       });
-      cropper.replace(image.src)
+      this.cropper = cropper;
+    } else {
+      this.cropper.replace(image.src)
+    }
   }
 
   handleImageSelection(selectorFiles: FileList){
