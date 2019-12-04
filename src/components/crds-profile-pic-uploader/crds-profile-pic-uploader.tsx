@@ -1,7 +1,8 @@
 import { Component, Prop, Element, h } from '@stencil/core';
 import Cropper from 'cropperjs';
+import icon from './icons/zoom-in.svg'
 
-
+// NOTE: this component is still missing the GraphQL API calls to persist the photo to the database
 
 @Component({
   tag: 'crds-profile-pic-uploader',
@@ -12,6 +13,7 @@ import Cropper from 'cropperjs';
 export class CrdsModal {
   @Prop() onSave: Function;
   @State() uploadedImgUrl: string;
+  @State() finalImgUrl: string;
   @State() cropper: object;
   private cropperImage: HTMLImageElement;
   private fileSelectorInput: HTMLInputElement;
@@ -46,11 +48,13 @@ export class CrdsModal {
       aspectRatio: 1/1,
       viewMode: 2,
       crop(event) {
-        console.log(event.detail.x);
       },
+      cropend(){
+      }
     });
     // set this cropper instance in state
     this.cropper = cropper;
+
   }
 
   // cropper to change the imgSrc on an already initiated cropperJS instance
@@ -69,7 +73,8 @@ export class CrdsModal {
   }
 
   handleSavePhoto(){
-    debugger
+    let finalImgUrl = this.cropper.getCroppedCanvas().toDataURL('image/jpeg');
+    // save finalImgUrl in GraphQL...
   }
 
   checkToShowPlaceholderImage(){
@@ -83,14 +88,38 @@ export class CrdsModal {
   }
 
   render() {
-    const { uploadedImgUrl, cropper } = this;
+    const { uploadedImgUrl, cropper, finalImgUrl } = this;
 
     return (
       <div class="profile-pic-cropper__container">
+
         <div class="image-container">
-          <img class="cropper-hidden" ref={el => (this.cropperImage = el as HTMLImageElement)} id="cropper" src={this.uploadedImgUrl}/>
+          <img class="cropper-hidden" ref={el => (this.cropperImage = el as HTMLImageElement)} id="original-image" src={this.uploadedImgUrl}/>
           <img class={`placeholder-img ${!this.checkToShowPlaceholderImage() ? 'cropper-hidden' : '' }`} id="placeholder" src="https://discountdoorhardware.ca/wp-content/uploads/2018/06/profile-placeholder-3.jpg"/>
         </div>
+        <div class={`cropper-buttons__container ${!cropper ? 'conceal' : '' }`}>
+
+          <div class="button-icon-container">
+            <crds-button color="blue" type="outline" onClick={()=> {this.cropper.zoom(0.1)}}></crds-button>
+            <crds-icon name="zoom-in" size="20" color="blue"></crds-icon>
+          </div>
+
+          <div class="button-icon-container">
+            <crds-button color="blue" type="outline" onClick={()=> {this.cropper.zoom(-0.1)}}></crds-button>
+            <crds-icon name="zoom-out" size="20" color="blue"></crds-icon>
+          </div>
+
+          <div class="button-icon-container">
+            <crds-button color="blue" type="outline" onClick={()=> {this.cropper.rotate(-45)}}></crds-button>
+            <crds-icon name="rotate-left" size="20" color="blue"></crds-icon>
+          </div>
+
+          <div class="button-icon-container">
+            <crds-button color="blue" type="outline" onClick={()=> {this.cropper.rotate(45)}}></crds-button>
+            <crds-icon name="rotate-right" size="20" color="blue"></crds-icon>
+          </div>
+        </div>
+
         <div class="choose-file__container">
           <crds-button color="blue" type="outline" text="Choose file" onClick={() => {this.triggerFileSelector()}}></crds-button>
           <input type="file" name="pic" accept="image/*" ref={el => (this.fileSelectorInput = el as HTMLInputElement)} onChange={(e) => this.handleImageSelection(e.target.files)}/>

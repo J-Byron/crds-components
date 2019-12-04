@@ -15,15 +15,17 @@ export class CrdsIcon {
   @Prop() size: string;
 
   render() {
-    
+
     const domparser = new DOMParser();
     const doc = domparser.parseFromString(icons, 'text/html');
-    const svg = doc.getElementById(this.name); 
+    const svg = doc.getElementById(this.name);
 
     svg.setAttribute('preserveAspectRatio', `none`);
     svg.setAttribute('height', `${this.size}px`);
     svg.setAttribute('width', `${this.size}px`);
     svg.getElementsByTagName('path')[0].setAttribute('fill', colors[this.color]);
+    {svg.getElementsByTagName('path')[1] ? svg.getElementsByTagName('path')[1].setAttribute('fill', colors[this.color]) : null}
+
 
     return <div class="svg-container" innerHTML={svg.outerHTML} />;
   }

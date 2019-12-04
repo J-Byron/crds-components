@@ -15,7 +15,8 @@ img {
 .image-container{
   width: 400px;
   height: 300px;
-  margin-bottom: 30px;
+  margin-bottom: 10px;
+  position: relative;
 }
 
 .profile-pic-cropper__container{
@@ -37,11 +38,13 @@ input[type="file" i]{
   display: none;
 }
 
-.cropper-point:not(.point-se){
+.cropper-point{
   border-radius: 50%;
 }
 
 .cropper-bg{
+  width: 400px !important;
+  height: 300px !important;
   background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQAQMAAAAlPW0iAAAAA3NCSVQICAjb4U/gAAAABlBMVEXMzMz////TjRV2AAAACXBIWXMAAArrAAAK6wGCiw1aAAAAHHRFWHRTb2Z0d2FyZQBBZG9iZSBGaXJld29ya3MgQ1M26LyyjAAAABFJREFUCJlj+M/AgBVhF/0PAH6/D/HkDxOGAAAAAElFTkSuQmCC');
 }
 
@@ -58,6 +61,10 @@ input[type="file" i]{
 .cropper-dashed.dashed-v, .cropper-dashed.dashed-h {
     display: none;
   }
+
+.cropper-center::before, .cropper-center::after{
+  background-color: #fff;
+}
 
 .cropper-center::before {
     height: 2px;
@@ -88,8 +95,68 @@ span.cropper-point.point-e, span.cropper-point.point-n, span.cropper-point.point
     width: 15px;
 }
 
-.cropper-point.point-nw, .cropper-point.point-ne, .cropper-point.point-sw, .cropper-point.point-se {
-    // left: -8px;
-    // top: -8px;
-    display: none;
+.cropper-point.point-se {
+    bottom: -9px;
+    right: -9px;
+}
+
+.cropper-point.point-ne {
+    right: -9px;
+    top: -9px;
+}
+
+.cropper-point.point-nw {
+    left: -9px;
+    top: -9px;
+}
+
+.cropper-point.point-sw {
+    bottom: -9px;
+    left: -9px;
+}
+
+.final-image{
+  width: 100px;
+    height: 100px;
+    position: absolute;
+    top: -24px;
+    right: -13px;
+    z-index: 1;
+    box-shadow: -2px 2px 12px -6px #666;
+    border-radius: 50%;
+}
+
+#original-image{
+  display: none !important;
+}
+
+.cropper-buttons__container{
+    display: flex;
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 10px;
+
+    &.conceal{
+      opacity: 0 !important;
+    }
+}
+
+.button-icon-container{
+  position: relative;
+  margin: 0 5px;
+
+  crds-button{
+    position: relative;
+    top: 0;
+    left: 0;
+    z-index: 1;
+  }
+
+  crds-icon{
+    position: absolute;
+    top: 9px;
+    left: 7px;
+    z-index: 0;
+  }
 }
