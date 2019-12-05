@@ -75,6 +75,7 @@ export class CrdsModal {
   handleSavePhoto(){
     let finalImgUrl = this.cropper.getCroppedCanvas().toDataURL('image/jpeg');
     // save finalImgUrl in GraphQL...
+    if (typeof this.onSave == 'function') this.onSave();
   }
 
   checkToShowPlaceholderImage(){
