@@ -99,9 +99,7 @@ export namespace Components {
     'label': string;
     'onModalClose': Function;
   }
-  interface CrdsProfilePicUploader {
-    'onSave': Function;
-  }
+  interface CrdsProfilePicUploader {}
   interface CrdsRecommendedContent {}
   interface CrdsSharedFooter {
     'env': string;
@@ -486,9 +484,7 @@ declare namespace LocalJSX {
     'label'?: string;
     'onModalClose'?: Function;
   }
-  interface CrdsProfilePicUploader {
-    'onSave'?: Function;
-  }
+  interface CrdsProfilePicUploader {}
   interface CrdsRecommendedContent {}
   interface CrdsSharedFooter {
     'env'?: string;

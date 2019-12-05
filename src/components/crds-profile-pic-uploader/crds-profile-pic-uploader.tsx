@@ -1,6 +1,11 @@
 import { Component, Prop, State, Element, h } from '@stencil/core';
 import Cropper from 'cropperjs';
+import { TitheUser } from './crds-profile-pic-uploader.interface';
+import { CrdsApolloService } from '../../shared/apollo';
 import icon from './icons/zoom-in.svg'
+import {
+  GET_USER_GROUPS,
+} from './crds-tithe-challenge.graphql'
 
 // NOTE: this component is still missing the GraphQL API calls to persist the photo to the database
 
@@ -11,12 +16,17 @@ import icon from './icons/zoom-in.svg'
 })
 
 export class CrdsModal {
-  @Prop() onSave: Function;
+  // @Prop() onSave: Function;
+  @State() user: TitheUser = null;
   @State() uploadedImgUrl: string;
   @State() finalImgUrl: string;
   @State() cropper;
   private cropperImage: HTMLImageElement;
   private fileSelectorInput: HTMLInputElement;
+
+  componentWillLoad() {
+    this.getUser()
+  }
 
   componentDidUpdate(){
     // when the user uploads an image (and state is updated), render the cropper
@@ -86,6 +96,13 @@ export class CrdsModal {
       // check if user has profile picture, if not, return true / show placeholder image
       return true
     }
+  }
+
+  public getUser() {
+    return CrdsApolloService.apolloClient.query({ query: GET_USER_GROUPS }).then(response => {
+      debugger
+      this.user = response.data.user;
+    });
   }
 
   render() {
