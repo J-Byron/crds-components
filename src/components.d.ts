@@ -75,6 +75,7 @@ export namespace Components {
     'size': string;
   }
   interface CrdsImage {
+    'aspectRatio': string;
     'size': string;
     'src': string;
   }
@@ -473,6 +474,7 @@ declare namespace LocalJSX {
     'size'?: string;
   }
   interface CrdsImage {
+    'aspectRatio'?: string;
     'size'?: string;
     'src'?: string;
   }
