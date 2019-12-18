@@ -33,17 +33,24 @@ stories
       'https://crds-media.imgix.net/7ASC7AviXmE8ywSWMy6MA8/a34a44b13caa8f63a3893577749f4022/EverydayFriends_90x90.jpg?auto=format,compress&w=360&h=202.5&fit=crop&ixlib=imgixjs-3.3.2'
     );
 
+    const size1 = select('size', ['card', 'thumbnail', 'overlay', 'media-object'], 'card');
+    const size2 = select('size', ['card', 'thumbnail', 'overlay', 'media-object'], 'card');
+    const size3 = select('size', ['card', 'thumbnail', 'overlay', 'media-object'], 'card');
+    const aspectRatio1 = text('Aspect Ratio 1', '3:2');
+    const aspectRatio2 = text('Aspect Ratio 2', '3:2');
+    const aspectRatio3 = text('Aspect Ratio 3', '3:2');
+
     return `
     <div style="max-width: 360px; margin: 100px auto;">
-      <crds-image src=${src1} ></crds-image>
+      <crds-image src=${src1} aspect-ratio=${aspectRatio1} size=${size1}></crds-image>
     </div>
 
     <div style="max-width: 360px; margin: 100px auto;">
-      <crds-image src=${src2} ></crds-image>
+      <crds-image src=${src2} aspect-ratio=${aspectRatio2} size=${size2}></crds-image>
     </div>
 
     <div style="max-width: 360px; margin: 100px auto;">
-      <crds-image src=${src3} ></crds-image>
+      <crds-image src=${src3} aspect-ratio=${aspectRatio3} size=${size3}></crds-image>
     </div>
   `;
   });

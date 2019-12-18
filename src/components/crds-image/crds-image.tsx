@@ -24,7 +24,7 @@ export class CrdsImage {
   }
 
   private validateAspectRatio() {
-    if (this.aspectRatio.replace(/[0-9]+:[0-9]+/g, '') !== '') {
+    if (this.aspectRatio.toString().replace(/[0-9]+:[0-9]+/g, '') !== '') {
       throw new Error(
         `${this.aspectRatio} is an invalid value for crds-image aspectRatio. It should be formatted x:y example 16:9`
       );
@@ -39,28 +39,29 @@ export class CrdsImage {
       .replace('?', '');
   }
 
-  private splitAspectRatio() {
-    return this.aspectRatio.split(':');
-  }
-
-  private getSrcUrlParameters(src: string) {
+  private getSrcBaseUrlParameters(src: string) {
     return new URLSearchParams(this.getSrcQueryString(src));
   }
 
-  private getSrcUrl(src: string) {
+  private getSrcBaseUrl(src: string) {
     return src.replace(this.getSrcQueryString(src), '').replace('?', '');
   }
 
   private setSrcImgixParameters(src: string, parameters = {}) {
-    const urlParameters = this.getSrcUrlParameters(src);
-    const url = this.getSrcUrl(src);
-
-    // @todo Start here
-    console.log(this.splitAspectRatio());
+    const urlParameters = this.getSrcBaseUrlParameters(src);
+    const url = this.getSrcBaseUrl(src);
 
     Object.entries(parameters).forEach(([key, value]: [string, string]) => {
       return urlParameters.set(key, value);
     });
+
+    if (this.aspectRatio) {
+      urlParameters.set('ar', this.aspectRatio);
+
+      if (!urlParameters.has('fit')) {
+        urlParameters.set('fit', 'clip');
+      }
+    }
 
     return [url, '?', urlParameters.toString()].join('');
   }
@@ -123,6 +124,7 @@ export class CrdsImage {
 
   render() {
     const { size } = this;
+    console.log(this);
     return (
       <div
         class={`crds-img-container ${size ? size : ''}`}
