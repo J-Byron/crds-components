@@ -106,7 +106,9 @@ export namespace Components {
     'onModalClose': Function;
   }
   interface CrdsQuiz {
-    'contentID': string;
+    'formId': string;
+    'height': string;
+    'userEmail': string;
   }
   interface CrdsRecommendedContent {}
   interface CrdsSharedFooter {
@@ -513,7 +515,9 @@ declare namespace LocalJSX {
     'onModalClose'?: Function;
   }
   interface CrdsQuiz {
-    'contentID'?: string;
+    'formId'?: string;
+    'height'?: string;
+    'userEmail'?: string;
   }
   interface CrdsRecommendedContent {}
   interface CrdsSharedFooter {

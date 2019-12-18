@@ -3,3 +3,9 @@ export interface User {
   nickName: string;
   email: string;
 }
+
+declare global {
+  interface Window {
+    typeformEmbed: any;
+  }
+}

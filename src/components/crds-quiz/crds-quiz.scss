@@ -1,1 +1,11 @@
 @import '../../shared/shared.scss';
+
+.typeform-quiz {
+  width: 100%;
+
+  // Forces the Typeform to take the full height of the load container.
+  > div,
+  > div > div {
+    height: 100%;
+  }
+}
