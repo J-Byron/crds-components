@@ -12,7 +12,7 @@ stories
 
     const thumbnailSrc = text(
       'thumbnailSrc',
-      'https://crossroads-media.imgix.net/images/crds-music/jumbotron/music-laying-it-all-down-bg.jpg?format=auto,compress'
+      'https://crds-media.imgix.net/vAmmBWKrrCOSZ9dnRwY4M/e1f94eafaa0d2b26910726f79fecc095/music-overcomes-single.jpg?auto=format,compress'
 
     );
 
@@ -55,7 +55,7 @@ stories
 
     const thumbnailSrc = text(
       'thumbnailSrc',
-      'https://crossroads-media.imgix.net/images/crds-music/jumbotron/music-laying-it-all-down-bg.jpg?format=auto,compress'
+      'https://crds-media.imgix.net/vAmmBWKrrCOSZ9dnRwY4M/e1f94eafaa0d2b26910726f79fecc095/music-overcomes-single.jpg?auto=format,compress'
 
     );
 
