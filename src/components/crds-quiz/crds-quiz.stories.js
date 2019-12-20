@@ -20,6 +20,8 @@ stories.addDecorator(withKnobs, js).add('crds-quiz', () => {
   return `
     <div style="margin: 20px 0;">
       <strong>IMPORTANT:</strong> The quiz requires https://embed.typeform.com/embed.js to be loaded on the page
+      <br>
+      <strong>IMPORTANT:</strong> The default example form uses a Netlify function to send the Typeform webhook payload to the email address entered for testing.
     </div>
     <crds-quiz form-id=${formId} height=${height} user-email=${userEmail}></crds-quiz>
   `;
