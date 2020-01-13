@@ -1,5 +1,5 @@
 import { Component, Prop, Element, h } from '@stencil/core';
-import { window } from './crds-subscribe-form-interface';
+// import { window } from './crds-subscribe-form-interface';
 import { HTMLStencilElement } from '@stencil/core/internal';
 
 @Component({
