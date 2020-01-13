@@ -49,6 +49,7 @@ export namespace Components {
   }
   interface CrdsGroupRenew {
     'daysToExpiration': number;
+    'groupIdsString': string;
   }
   interface CrdsGroupRenewButton {
     'daysToExpiration': number;
@@ -135,6 +136,9 @@ export namespace Components {
   interface CrdsSubscribe {
     'label': string;
     'src': string;
+  }
+  interface CrdsSubscribeForm {
+    'formId': string;
   }
   interface CrdsTitheChallenge {
     'selectedFeeling': Response;
@@ -317,6 +321,12 @@ declare global {
     new (): HTMLCrdsSubscribeElement;
   };
 
+  interface HTMLCrdsSubscribeFormElement extends Components.CrdsSubscribeForm, HTMLStencilElement {}
+  var HTMLCrdsSubscribeFormElement: {
+    prototype: HTMLCrdsSubscribeFormElement;
+    new (): HTMLCrdsSubscribeFormElement;
+  };
+
   interface HTMLCrdsTitheChallengeElement extends Components.CrdsTitheChallenge, HTMLStencilElement {}
   var HTMLCrdsTitheChallengeElement: {
     prototype: HTMLCrdsTitheChallengeElement;
@@ -399,6 +409,7 @@ declare global {
     'crds-snail-trail': HTMLCrdsSnailTrailElement;
     'crds-snail-trail-link': HTMLCrdsSnailTrailLinkElement;
     'crds-subscribe': HTMLCrdsSubscribeElement;
+    'crds-subscribe-form': HTMLCrdsSubscribeFormElement;
     'crds-tithe-challenge': HTMLCrdsTitheChallengeElement;
     'crds-video': HTMLCrdsVideoElement;
     'give-nav': HTMLGiveNavElement;
@@ -450,6 +461,7 @@ declare namespace LocalJSX {
   }
   interface CrdsGroupRenew {
     'daysToExpiration'?: number;
+    'groupIdsString'?: string;
   }
   interface CrdsGroupRenewButton {
     'daysToExpiration'?: number;
@@ -538,6 +550,9 @@ declare namespace LocalJSX {
     'label'?: string;
     'src'?: string;
   }
+  interface CrdsSubscribeForm {
+    'formId'?: string;
+  }
   interface CrdsTitheChallenge {
     'selectedFeeling'?: Response;
   }
@@ -606,6 +621,7 @@ declare namespace LocalJSX {
     'crds-snail-trail': CrdsSnailTrail;
     'crds-snail-trail-link': CrdsSnailTrailLink;
     'crds-subscribe': CrdsSubscribe;
+    'crds-subscribe-form': CrdsSubscribeForm;
     'crds-tithe-challenge': CrdsTitheChallenge;
     'crds-video': CrdsVideo;
     'give-nav': GiveNav;
@@ -647,6 +663,7 @@ declare module "@stencil/core" {
       'crds-snail-trail': LocalJSX.CrdsSnailTrail & JSXBase.HTMLAttributes<HTMLCrdsSnailTrailElement>;
       'crds-snail-trail-link': LocalJSX.CrdsSnailTrailLink & JSXBase.HTMLAttributes<HTMLCrdsSnailTrailLinkElement>;
       'crds-subscribe': LocalJSX.CrdsSubscribe & JSXBase.HTMLAttributes<HTMLCrdsSubscribeElement>;
+      'crds-subscribe-form': LocalJSX.CrdsSubscribeForm & JSXBase.HTMLAttributes<HTMLCrdsSubscribeFormElement>;
       'crds-tithe-challenge': LocalJSX.CrdsTitheChallenge & JSXBase.HTMLAttributes<HTMLCrdsTitheChallengeElement>;
       'crds-video': LocalJSX.CrdsVideo & JSXBase.HTMLAttributes<HTMLCrdsVideoElement>;
       'give-nav': LocalJSX.GiveNav & JSXBase.HTMLAttributes<HTMLGiveNavElement>;
