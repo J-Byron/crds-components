@@ -1,0 +1,21 @@
+{
+  "name": "typeform-to-cosmo.js",
+  "version": "1.0.0",
+  "description": "Netlify function to hook TypeForm Quiz component with GraphQL/Cosmo DB",
+  "main": "typeform-to-cosmo.js.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "netlify",
+    "serverless",
+    "apis",
+    "email",
+    "js"
+  ],
+  "author": "Netlify",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^0.19.1"
+  }
+}
