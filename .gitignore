@@ -34,3 +34,6 @@ cypress/videos
 cypress/screenshots
 loadenv.ps1
 .vs/crds-components/v15/.suo
+
+# Local Netlify folder
+.netlify
