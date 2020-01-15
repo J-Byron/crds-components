@@ -49,6 +49,7 @@ export namespace Components {
   }
   interface CrdsGroupRenew {
     'daysToExpiration': number;
+    'groupIdsString': string;
   }
   interface CrdsGroupRenewButton {
     'daysToExpiration': number;
@@ -108,6 +109,9 @@ export namespace Components {
     'isActive': boolean;
     'label': string;
     'onModalClose': Function;
+  }
+  interface CrdsProfileSecurity {
+    'defaultName': string;
   }
   interface CrdsRecommendedContent {}
   interface CrdsSharedFooter {
@@ -269,6 +273,12 @@ declare global {
     new (): HTMLCrdsModalElement;
   };
 
+  interface HTMLCrdsProfileSecurityElement extends Components.CrdsProfileSecurity, HTMLStencilElement {}
+  var HTMLCrdsProfileSecurityElement: {
+    prototype: HTMLCrdsProfileSecurityElement;
+    new (): HTMLCrdsProfileSecurityElement;
+  };
+
   interface HTMLCrdsRecommendedContentElement extends Components.CrdsRecommendedContent, HTMLStencilElement {}
   var HTMLCrdsRecommendedContentElement: {
     prototype: HTMLCrdsRecommendedContentElement;
@@ -391,6 +401,7 @@ declare global {
     'crds-label': HTMLCrdsLabelElement;
     'crds-media-card': HTMLCrdsMediaCardElement;
     'crds-modal': HTMLCrdsModalElement;
+    'crds-profile-security': HTMLCrdsProfileSecurityElement;
     'crds-recommended-content': HTMLCrdsRecommendedContentElement;
     'crds-shared-footer': HTMLCrdsSharedFooterElement;
     'crds-shared-header': HTMLCrdsSharedHeaderElement;
@@ -450,6 +461,7 @@ declare namespace LocalJSX {
   }
   interface CrdsGroupRenew {
     'daysToExpiration'?: number;
+    'groupIdsString'?: string;
   }
   interface CrdsGroupRenewButton {
     'daysToExpiration'?: number;
@@ -509,6 +521,9 @@ declare namespace LocalJSX {
     'isActive'?: boolean;
     'label'?: string;
     'onModalClose'?: Function;
+  }
+  interface CrdsProfileSecurity {
+    'defaultName'?: string;
   }
   interface CrdsRecommendedContent {}
   interface CrdsSharedFooter {
@@ -598,6 +613,7 @@ declare namespace LocalJSX {
     'crds-label': CrdsLabel;
     'crds-media-card': CrdsMediaCard;
     'crds-modal': CrdsModal;
+    'crds-profile-security': CrdsProfileSecurity;
     'crds-recommended-content': CrdsRecommendedContent;
     'crds-shared-footer': CrdsSharedFooter;
     'crds-shared-header': CrdsSharedHeader;
@@ -639,6 +655,7 @@ declare module "@stencil/core" {
       'crds-label': LocalJSX.CrdsLabel & JSXBase.HTMLAttributes<HTMLCrdsLabelElement>;
       'crds-media-card': LocalJSX.CrdsMediaCard & JSXBase.HTMLAttributes<HTMLCrdsMediaCardElement>;
       'crds-modal': LocalJSX.CrdsModal & JSXBase.HTMLAttributes<HTMLCrdsModalElement>;
+      'crds-profile-security': LocalJSX.CrdsProfileSecurity & JSXBase.HTMLAttributes<HTMLCrdsProfileSecurityElement>;
       'crds-recommended-content': LocalJSX.CrdsRecommendedContent & JSXBase.HTMLAttributes<HTMLCrdsRecommendedContentElement>;
       'crds-shared-footer': LocalJSX.CrdsSharedFooter & JSXBase.HTMLAttributes<HTMLCrdsSharedFooterElement>;
       'crds-shared-header': LocalJSX.CrdsSharedHeader & JSXBase.HTMLAttributes<HTMLCrdsSharedHeaderElement>;
