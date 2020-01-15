@@ -1,4 +1,4 @@
-export interface ProfileSecurity {
+export interface ProfileSecurityUser {
   firstName: string;
   nickName: string;
 }

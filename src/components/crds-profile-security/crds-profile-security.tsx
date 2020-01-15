@@ -1,5 +1,5 @@
 import { Component, Prop, State, Element, Watch, h } from '@stencil/core';
-import { ProfileSecurityUser } from './crds-profile-security';
+import { ProfileSecurityUser } from './crds-profile-security-interface';
 import { HTMLStencilElement } from '@stencil/core/internal';
 import { GET_USER } from './crds-profile-security.graphql';
 import { CrdsApolloService } from '../../shared/apollo';
