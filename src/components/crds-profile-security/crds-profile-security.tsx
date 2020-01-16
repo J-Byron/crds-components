@@ -88,11 +88,21 @@ export class CrdsProfileSecurity {
   public render() {
     if (!this.displayName) return '';
     return (
-      <div class="greeting d-flex">
-        <img class="greeting-image" src={this.renderImage()} />
-        <div class="m-auto-ends push-half-left soft-half-ends soft-quarter-right">
-          <h3 class="component-header flush text-gray-dark mobile-header">{this.renderGreeting()}<span class={this.renderColor()}>{this.renderName()}</span></h3>
-          <p class="text-gray-dark flush">This place was made for you</p>
+      <div class="row">
+        <div class="col-sm-12 soft-ends">
+          <div class="input-group">
+            <label for="email">Email</label>
+            <input class="form-control" type="email" id="email" name="email" placeholder="Enter email address"/>
+          </div>
+          <button class="btn btn-medium btn-blue">Save Changes</button>
+        </div>
+        <div class="col-sm-12 soft-ends">
+          <div class="input-group">
+            <label for="password">Change Password</label>
+            <input class="form-control" type="password" id="new-password" name="password" placeholder="New password"/>
+            <input class="form-control" type="password" id="confirm-password" name="password" placeholder="Confirm new password"/>
+          </div>
+          <button class="btn btn-medium btn-blue">Save Changes</button>
         </div>
       </div>
     );
