@@ -90,19 +90,29 @@ export class CrdsProfileSecurity {
     return (
       <div class="row">
         <div class="col-sm-12 soft-ends">
+          <h3 class="component-header">Change Email</h3>
           <div class="input-group">
-            <label for="email">Email</label>
+            <label>Current Password</label>
+            <input class="form-control" type="password" id="current-password" name="password" placeholder="Current password"/>
+          </div>
+          <div class="input-group">
+            <label>Email</label>
             <input class="form-control" type="email" id="email" name="email" placeholder="Enter email address"/>
           </div>
-          <button class="btn btn-medium btn-blue">Save Changes</button>
+          <button class="btn btn-medium btn-blue">Save</button>
         </div>
         <div class="col-sm-12 soft-ends">
+          <h3 class="component-header">Change Password</h3>
           <div class="input-group">
-            <label for="password">Change Password</label>
+            <label>Current Password</label>
+            <input class="form-control" type="password" id="current-password" name="password" placeholder="Current password"/>
+          </div>
+          <div class="input-group">
+            <label>New Password</label>
             <input class="form-control" type="password" id="new-password" name="password" placeholder="New password"/>
             <input class="form-control" type="password" id="confirm-password" name="password" placeholder="Confirm new password"/>
           </div>
-          <button class="btn btn-medium btn-blue">Save Changes</button>
+          <button class="btn btn-medium btn-blue">Save</button>
         </div>
       </div>
     );
