@@ -11,5 +11,6 @@ stories
   .addDecorator(withKnobs, js)
   .add('crds-profile-security', () => {
     const defaultName = text('defaultName', '');
+    const currentEmail = text('email', '');
     return `<crds-profile-security default-name=${defaultName}></crds-profile-security>`;
   });
