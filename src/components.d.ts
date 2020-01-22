@@ -111,7 +111,6 @@ export namespace Components {
     'onModalClose': Function;
   }
   interface CrdsProfileSecurity {
-    'currentEmail': string;
     'defaultName': string;
   }
   interface CrdsRecommendedContent {}
@@ -524,7 +523,6 @@ declare namespace LocalJSX {
     'onModalClose'?: Function;
   }
   interface CrdsProfileSecurity {
-    'currentEmail'?: string;
     'defaultName'?: string;
   }
   interface CrdsRecommendedContent {}

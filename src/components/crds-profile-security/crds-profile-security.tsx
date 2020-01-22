@@ -4,6 +4,7 @@ import { HTMLStencilElement } from '@stencil/core/internal';
 import { GET_USER } from './crds-profile-security.graphql';
 import { CrdsApolloService } from '../../shared/apollo';
 import { isAuthenticated } from '../../global/authInit';
+import validate from 'validate.js';
 
 @Component({
   tag: 'crds-profile-security',
@@ -16,7 +17,7 @@ export class CrdsProfileSecurity {
 
   @State() displayName: string = null;
   @Prop() defaultName: string;
-  @Prop() currentEmail: string;
+  @State() currentEmail: string;
   @Element() public host: HTMLStencilElement;
 
 
@@ -30,10 +31,25 @@ export class CrdsProfileSecurity {
   }
 
   public componentDidRender() {
+
+    var constraints = {
+      password: {
+        presence: true,
+        length: {
+          minimum: 6,
+          message: "must be at least 6 characters"
+        }
+      },
+      currentEmail: {
+        email: true
+      },
+    };
+
     const renderedEvent = new CustomEvent('component rendered', {
       detail: this.host
     });
     document.dispatchEvent(renderedEvent);
+    console.log(validate({password: "bad", currentEmail: this.renderEmail()}, constraints));
 
     //setTimeout(() => {
       //this.host.shadowRoot.querySelector('.greeting').classList.add('fade-in');
@@ -64,7 +80,7 @@ export class CrdsProfileSecurity {
 
 
   public renderEmail() {
-    return `test@email.com`
+    return `${this.user.email}`;
     //return `${this.email}`;
   }
 
@@ -80,7 +96,7 @@ export class CrdsProfileSecurity {
           <h3 class="component-header">Change Email</h3>
           <div class="input-group">
             <label>Email</label>
-            <input class="form-control" type="email" id="email" name="email" placeholder="Enter email address" value={this.renderEmail()}/>
+            <input class="form-control" type="email" id="currentEmail" name="currentEmail" placeholder="Enter email address" value={this.renderEmail()} />
           </div>
           <div class="input-group">
             <label>Current Password</label>
