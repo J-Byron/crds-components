@@ -1,10 +1,11 @@
-import gql from "graphql-tag";
+import gql from 'graphql-tag';
 
 export const GET_USER = gql`
   {
     user {
       firstName
       nickName
+      imageUrl
       email
     }
   }
