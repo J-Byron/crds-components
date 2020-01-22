@@ -28,12 +28,12 @@ export class CrdsProfileSecurity {
       presence: true,
       length: {
         minimum: 6,
-        message: "must be at least 6 characters"
+        message: "Password must be at least 6 characters"
       }
     },
     newEmail: {
       email: true
-      }
+    }
   };
   @State() newPassword: string;
   @Element() public host: HTMLStencilElement;
@@ -96,23 +96,9 @@ export class CrdsProfileSecurity {
   // }
 
   public initToastr() {
-    toastr.options = {
-      "closeButton": false,
-      "debug": false,
-      "newestOnTop": false,
-      "progressBar": false,
-      "positionClass": "toast-top-right",
-      "preventDuplicates": false,
-      "onclick": null,
-      "showDuration": "300",
-      "hideDuration": "1000",
-      "timeOut": "5000",
-      "extendedTimeOut": "1000",
-      "showEasing": "swing",
-      "hideEasing": "linear",
-      "showMethod": "fadeIn",
-      "hideMethod": "fadeOut"
-    }
+    toastr.options.closeButton = true;
+    toastr.options.closeHtml = '<a type="button" class="toast-close-button" role="button">×</a>';
+    toastr.options.escapeHtml = false;
   }
 
   handlePasswordSubmit(e) {
@@ -131,13 +117,31 @@ export class CrdsProfileSecurity {
 
     console.log(newEmailInput.value);
     console.log(currentPasswordInput.value);
+    let validationResults = validate({currentPassword: currentPasswordInput.value, currentEmail: newEmailInput.value}, this.constraints)
 
-    if(validate({currentPassword: currentPasswordInput.value, currentEmail: newEmailInput.value}, this.constraints)) {
+    if(validationResults) {
       // If validate() returns anything, there are Errors
-      toastr.error('BAD');
+      toastr.error('Unable to update your email.');
+      for (var property in validationResults) {
+        if (validationResults.hasOwnProperty(property)) {
+          // Do things here
+          console.log(property);
+          // add invalid status to form field
+          var currentInput = e.target.querySelectorAll("#"+property)[0];
+          currentInput.classList.add('has-error');
+        }
+
+
+      }
     } else {
       // validate returned nothing, good to submit
-      toastr.success('Hey, we made it make toaster come up on form submission');
+
+      // Hit the API
+
+      // Status codes back from API
+      // 409 - Conflict with Email
+      // 200 - Everything is good
+      toastr.success('You have successfully updated your email.');
     }
 
     //console.log(this.currentPassword);
