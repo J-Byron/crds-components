@@ -113,12 +113,12 @@ export class CrdsProfileSecurity {
      let validateNewPassword = validate({newPassword: newPasswordInput.value, confirmNewPassword: confirmNewPasswordInput.value}, this.constraints);
      if (validateNewPassword) {
       toastr.error('They Do not Match :(');
-      console.log(newPasswordInput.value);
-      console.log(confirmNewPasswordInput.value);
+      console.log("New Password: " + newPasswordInput.value);
+      console.log("Confirm New Password: " + confirmNewPasswordInput.value);
      }else{
       toastr.error('They Match!');
-      console.log("New Password" + newPasswordInput.value);
-      console.log("Confirm New Password" + confirmNewPasswordInput.value);
+      console.log("New Password: " + newPasswordInput.value);
+      console.log("Confirm New Password: " + confirmNewPasswordInput.value);
      }
   }
 
