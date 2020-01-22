@@ -18,6 +18,10 @@ export namespace Components {
     'disabled': boolean;
     'display'?: string;
     'href'?: string;
+    'icon': string;
+    'iconAlign': string;
+    'iconColor': string;
+    'iconSize': string;
     'onClick'?: (event: MouseEvent) => void;
     'secondary': boolean;
     'size'?: string;
@@ -427,6 +431,10 @@ declare namespace LocalJSX {
     'disabled'?: boolean;
     'display'?: string;
     'href'?: string;
+    'icon'?: string;
+    'iconAlign'?: string;
+    'iconColor'?: string;
+    'iconSize'?: string;
     'onClick'?: (event: MouseEvent) => void;
     'secondary'?: boolean;
     'size'?: string;
