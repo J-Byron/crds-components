@@ -24,11 +24,23 @@ export class CrdsProfileSecurity {
   @State() newEmail: string;
   @State() currentPassword: string;
   @State() constraints = {
-    currentPassword: {
+    "newPassword": {
+      // Is password required?
       presence: true,
+      // Is password at least 5 characters long
       length: {
-        minimum: 6,
-        message: "Password must be at least 6 characters"
+        minimum: 5
+      }
+    },
+    "confirmNewPassword": {
+      // Do ou need to confirm your password?
+      presence: true,
+      // It needs to be equal to the other password
+      equality: {
+        // Input we want it to be equal to
+        attribute: "newPassword",
+        // Error message if passwords don't match
+        //message: "^The passwords does not match"
       }
     },
     newEmail: {
@@ -36,6 +48,7 @@ export class CrdsProfileSecurity {
     }
   };
   @State() newPassword: string;
+  @State() confirmNewPassword: string;
   @Element() public host: HTMLStencilElement;
 
   public async componentWillLoad(){
@@ -87,28 +100,30 @@ export class CrdsProfileSecurity {
     console.error(err);
   }
 
-  // public handleFocus() {
-  //   console.log('you clicked into the input 👌')
-  // }
-
-  // public handleBlur() {
-  //   console.log('you clicked out of the input 👋')
-  // }
-
   public initToastr() {
-    toastr.options.closeButton = true;
-    toastr.options.closeHtml = '<a type="button" class="toast-close-button" role="button">×</a>';
-    toastr.options.escapeHtml = false;
   }
 
   handlePasswordSubmit(e) {
     e.preventDefault();
+
+    let newPasswordInput = e.target.querySelectorAll("#newPassword")[0];
+    let confirmNewPasswordInput = e.target.querySelectorAll("#confirmNewPassword")[0];
+
+     // Validate that both new PW fields are the same
+     let validateNewPassword = validate({newPassword: newPasswordInput.value, confirmNewPassword: confirmNewPasswordInput.value}, this.constraints);
+     if (validateNewPassword) {
+      toastr.error('They Do not Match :(');
+      console.log(newPasswordInput.value);
+      console.log(confirmNewPasswordInput.value);
+     }else{
+      toastr.error('They Match!');
+      console.log("New Password" + newPasswordInput.value);
+      console.log("Confirm New Password" + confirmNewPasswordInput.value);
+     }
   }
 
   handleEmailSubmit(e) {
     e.preventDefault();
-
-
     //
     console.log(e.target);
     console.log(this.host);
@@ -117,8 +132,9 @@ export class CrdsProfileSecurity {
 
     console.log(newEmailInput.value);
     console.log(currentPasswordInput.value);
+    
+    
     let validationResults = validate({currentPassword: currentPasswordInput.value, currentEmail: newEmailInput.value}, this.constraints)
-
     if(validationResults) {
       // If validate() returns anything, there are Errors
       toastr.error('Unable to update your email.');
@@ -155,7 +171,7 @@ export class CrdsProfileSecurity {
   }
 
   public render() {
-    if (!this.displayName) return '';
+    //if (!this.displayName) return '';
     return (
       <div class="row">
         <div class="col-sm-12 soft-ends">
@@ -175,7 +191,7 @@ export class CrdsProfileSecurity {
               <label>Current Password</label>
               <input class="form-control" type="password" id="currentPassword" name="currentPassword" placeholder="Current password" value="" required />
             </div>
-            <button class="btn btn-medium btn-blue" type="submit" value="Submit">Update Email</button><span class="label push-left">{this.value}</span>
+            <button class="btn btn-medium btn-blue" type="submit" value="Submit">Update Email</button>
           </form>
         </div>
         <div class="col-sm-12 soft-ends">
@@ -187,8 +203,8 @@ export class CrdsProfileSecurity {
             </div>
             <div class="input-group">
               <label>New Password</label>
-              <input class="form-control" type="password" id="new-password" name="password" placeholder="New password"/>
-              <input class="form-control" type="password" id="confirm-password" name="password" placeholder="Confirm new password"/>
+              <input class="form-control" type="password" id="newPassword" name="newPassword" placeholder="New password"/>
+              <input class="form-control" type="password" id="confirmNewPassword" name="confirmNewPassword" placeholder="Confirm new password"/>
             </div>
             <button class="btn btn-medium btn-blue" type="submit" value="Submit">Update Password</button>
           </form>
