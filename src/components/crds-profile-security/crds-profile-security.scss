@@ -8,3 +8,12 @@
 
 // Local Styles to Components
 @import '../../shared/shared.scss';
+
+
+.input-group {
+    width: 100%;
+}
+input {
+    width: 100%;
+    min-width: 50vw;
+}

@@ -102,7 +102,7 @@ export class CrdsProfileSecurity {
             <label>Current Password</label>
             <input class="form-control" type="password" id="current-password" name="password" placeholder="Current password"/>
           </div>
-          <button class="btn btn-medium btn-blue">Save</button><span>{this.renderEmail()}</span>
+          <button class="btn btn-medium btn-blue">Save</button><span class="label push-left">{this.renderEmail()}</span>
         </div>
         <div class="col-sm-12 soft-ends">
           <h3 class="component-header">Change Password</h3>
