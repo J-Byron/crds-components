@@ -4,6 +4,7 @@ import { HTMLStencilElement } from '@stencil/core/internal';
 import { GET_USER } from './crds-profile-security.graphql';
 import { CrdsApolloService } from '../../shared/apollo';
 import { isAuthenticated } from '../../global/authInit';
+import toastr from 'toastr';
 import validate from 'validate.js';
 
 @Component({
@@ -22,7 +23,14 @@ export class CrdsProfileSecurity {
 
 
   public async componentWillLoad(){
+    this.initToastr();
     return CrdsApolloService.subscribeToApolloClient();
+  }
+
+  public initToastr() {
+    toastr.options.closeButton = true;
+    toastr.options.closeHtml = '<a type="button" class="toast-close-button" role="button">×</a>';
+    toastr.options.escapeHtml = false;
   }
 
   public componentWillRender() {
