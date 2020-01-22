@@ -87,11 +87,6 @@ const logTypeFormResponse = response => {
 };
 
 exports.handler = (event, context, callback) => {
-  callback(null, {
-    statusCode: 200,
-    body: 'Test'
-  });
-
   logTypeFormResponse(JSON.parse(event.body))
     .then(({ data }) => {
       callback(null, {
