@@ -16,15 +16,21 @@ import validate from 'validate.js';
 })
 export class CrdsProfileSecurity {
   private user: ProfileSecurityUser = null;
-
-  @State() displayName: string = null;
-  // @State() value: string;
+  
+  // Props
   @Prop() defaultName: string;
-  @State() currentEmail: string;
+  @Prop() currentEmail: string;
+  // States
+  @State() displayName: string = null;
   @State() newEmail: string;
   @State() currentPassword: string;
+  @State() newPassword: string;
+  @State() confirmNewPassword: string;
+  // Elements
+  @Element() public host: HTMLStencilElement;
+
   @State() constraints = {
-    "newPassword": {
+    newPassword: {
       // Is password required?
       presence: true,
       // Is password at least 5 characters long
@@ -32,7 +38,7 @@ export class CrdsProfileSecurity {
         minimum: 5
       }
     },
-    "confirmNewPassword": {
+    confirmNewPassword: {
       // Do ou need to confirm your password?
       presence: true,
       // It needs to be equal to the other password
@@ -47,19 +53,14 @@ export class CrdsProfileSecurity {
       email: true
     }
   };
-  @State() newPassword: string;
-  @State() confirmNewPassword: string;
-  @Element() public host: HTMLStencilElement;
 
   public async componentWillLoad(){
     this.initToastr();
     return CrdsApolloService.subscribeToApolloClient();
   }
-
   public componentWillRender() {
     if (isAuthenticated()) return this.getUser();
   }
-
   public componentDidRender() {
 
     const renderedEvent = new CustomEvent('component rendered', {
@@ -68,7 +69,6 @@ export class CrdsProfileSecurity {
     document.dispatchEvent(renderedEvent);
     //console.log(validate({password: "bad", currentEmail: this.renderEmail()}, constraints));
   }
-
   public getUser() {
     return CrdsApolloService.apolloClient
       .query({ query: GET_USER })
@@ -82,46 +82,51 @@ export class CrdsProfileSecurity {
         this.logError(err);
       });
   }
-
   private getDisplayName(): void {
     this.displayName = (this.user && (this.user.nickName || this.user.firstName)) || this.defaultName || '';
   }
-
   public renderName() {
     return `${this.displayName}`;
   }
-
-
   public renderEmail() {
     return `${this.user.email}`;
   }
-
   private logError(err) {
     console.error(err);
   }
-
   public initToastr() {
   }
 
+
+  //=================================================================
+  //  New Password Submission
+  //=================================================================
   handlePasswordSubmit(e) {
     e.preventDefault();
 
     let newPasswordInput = e.target.querySelectorAll("#newPassword")[0];
     let confirmNewPasswordInput = e.target.querySelectorAll("#confirmNewPassword")[0];
+    
+    // Validate that both new PW fields are the same
+    let newPasswordValidationResults = validate({
+      newPassword: newPasswordInput.value, 
+      confirmNewPassword: confirmNewPasswordInput.value
+    }, this.constraints);
 
-     // Validate that both new PW fields are the same
-     let validateNewPassword = validate({newPassword: newPasswordInput.value, confirmNewPassword: confirmNewPasswordInput.value}, this.constraints);
-     if (validateNewPassword) {
+    if (newPasswordValidationResults) {
       toastr.error('They Do not Match :(');
       console.log("New Password: " + newPasswordInput.value);
       console.log("Confirm New Password: " + confirmNewPasswordInput.value);
-     }else{
+    }else{
       toastr.error('They Match!');
       console.log("New Password: " + newPasswordInput.value);
       console.log("Confirm New Password: " + confirmNewPasswordInput.value);
-     }
+    }
   }
 
+  //=================================================================
+  //  New Email Submission
+  //=================================================================
   handleEmailSubmit(e) {
     e.preventDefault();
     //
@@ -133,13 +138,17 @@ export class CrdsProfileSecurity {
     console.log(newEmailInput.value);
     console.log(currentPasswordInput.value);
     
+    // Validation
+    let emailValidationResults = validate({
+      currentPassword: currentPasswordInput.value, 
+      currentEmail: newEmailInput.value
+    }, this.constraints)
     
-    let validationResults = validate({currentPassword: currentPasswordInput.value, currentEmail: newEmailInput.value}, this.constraints)
-    if(validationResults) {
+    if(emailValidationResults) {
       // If validate() returns anything, there are Errors
       toastr.error('Unable to update your email.');
-      for (var property in validationResults) {
-        if (validationResults.hasOwnProperty(property)) {
+      for (var property in emailValidationResults) {
+        if (emailValidationResults.hasOwnProperty(property)) {
           // Do things here
           console.log(property);
           // add invalid status to form field
@@ -166,14 +175,11 @@ export class CrdsProfileSecurity {
     // send data to our backend
   }
 
-  handleChange(event) {
-    console.log(event);
-  }
-
   public render() {
-    //if (!this.displayName) return '';
     return (
       <div class="row">
+        
+        
         <div class="col-sm-12 soft-ends">
           <form onSubmit={(e) => this.handleEmailSubmit(e)}>
             <h3 class="component-header">Change Email</h3>
@@ -185,15 +191,17 @@ export class CrdsProfileSecurity {
             <div class="input-group">
               <label>New Email</label>
               <input class="form-control" type="email" id="newEmail" name="newEmail" placeholder="Enter email address"
-               value="" onInput={(event) => this.handleChange(event)}  required />
+               value="" required />
             </div>
             <div class="input-group">
               <label>Current Password</label>
               <input class="form-control" type="password" id="currentPassword" name="currentPassword" placeholder="Current password" value="" required />
             </div>
-            <button class="btn btn-medium btn-blue" type="submit" value="Submit">Update Email</button>
+            <button class="btn btn-medium btn-blue" type="submit" value="Submit Email">Update Email</button>
           </form>
         </div>
+
+        
         <div class="col-sm-12 soft-ends">
           <form onSubmit={(e) => this.handlePasswordSubmit(e)}>
             <h3 class="component-header">Change Password</h3>
@@ -206,9 +214,11 @@ export class CrdsProfileSecurity {
               <input class="form-control" type="password" id="newPassword" name="newPassword" placeholder="New password"/>
               <input class="form-control" type="password" id="confirmNewPassword" name="confirmNewPassword" placeholder="Confirm new password"/>
             </div>
-            <button class="btn btn-medium btn-blue" type="submit" value="Submit">Update Password</button>
+            <button class="btn btn-medium btn-blue" type="submit" value="Submit Password">Update Password</button>
           </form>
         </div>
+
+
       </div>
     );
   }
