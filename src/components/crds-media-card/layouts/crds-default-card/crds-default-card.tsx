@@ -38,9 +38,9 @@ export class CrdsDefaultLayout {
         { url && <div class="overlay"></div> }
           {imageSrc && <crds-image src={imageSrc} size="card" />}
           {icons[contentType] && (
-            <div class="card-stamp-container">
-              {iconLabel && <span class="card-stamp">{iconLabel}</span>}
+            <div class="card-content-type-container">
               <crds-icon style={{ paddingLeft: '0.25rem' }} name={icons[contentType]} size={'15'} color={'white'} />
+              {contentType && <span class="card-stamp">{contentType}</span>}
             </div>
           )}
           {thumbnailSrc && (
@@ -48,6 +48,11 @@ export class CrdsDefaultLayout {
               <crds-image src={thumbnailSrc} size="thumbnail" />
             </div>
           )}
+          
+            <div class="card-stamp-container">
+              {iconLabel && <span class="card-stamp">{iconLabel}</span>}
+            </div>
+     
         </a>
         {category && <span class="card-meta-top">{category}</span>}
 
