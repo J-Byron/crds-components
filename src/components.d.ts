@@ -49,6 +49,7 @@ export namespace Components {
   }
   interface CrdsGroupRenew {
     'daysToExpiration': number;
+    'groupIdsString': string;
   }
   interface CrdsGroupRenewButton {
     'daysToExpiration': number;
@@ -87,6 +88,7 @@ export namespace Components {
     'imageUrl': string;
     'titleHref': string;
   }
+  interface CrdsInstagramFeed {}
   interface CrdsLabel {
     'text': string;
     'tint': string;
@@ -251,6 +253,12 @@ declare global {
     new (): HTMLCrdsImageTitleCutoutElement;
   };
 
+  interface HTMLCrdsInstagramFeedElement extends Components.CrdsInstagramFeed, HTMLStencilElement {}
+  var HTMLCrdsInstagramFeedElement: {
+    prototype: HTMLCrdsInstagramFeedElement;
+    new (): HTMLCrdsInstagramFeedElement;
+  };
+
   interface HTMLCrdsLabelElement extends Components.CrdsLabel, HTMLStencilElement {}
   var HTMLCrdsLabelElement: {
     prototype: HTMLCrdsLabelElement;
@@ -388,6 +396,7 @@ declare global {
     'crds-icon': HTMLCrdsIconElement;
     'crds-image': HTMLCrdsImageElement;
     'crds-image-title-cutout': HTMLCrdsImageTitleCutoutElement;
+    'crds-instagram-feed': HTMLCrdsInstagramFeedElement;
     'crds-label': HTMLCrdsLabelElement;
     'crds-media-card': HTMLCrdsMediaCardElement;
     'crds-modal': HTMLCrdsModalElement;
@@ -450,6 +459,7 @@ declare namespace LocalJSX {
   }
   interface CrdsGroupRenew {
     'daysToExpiration'?: number;
+    'groupIdsString'?: string;
   }
   interface CrdsGroupRenewButton {
     'daysToExpiration'?: number;
@@ -488,6 +498,7 @@ declare namespace LocalJSX {
     'imageUrl'?: string;
     'titleHref'?: string;
   }
+  interface CrdsInstagramFeed {}
   interface CrdsLabel {
     'text'?: string;
     'tint'?: string;
@@ -595,6 +606,7 @@ declare namespace LocalJSX {
     'crds-icon': CrdsIcon;
     'crds-image': CrdsImage;
     'crds-image-title-cutout': CrdsImageTitleCutout;
+    'crds-instagram-feed': CrdsInstagramFeed;
     'crds-label': CrdsLabel;
     'crds-media-card': CrdsMediaCard;
     'crds-modal': CrdsModal;
@@ -636,6 +648,7 @@ declare module "@stencil/core" {
       'crds-icon': LocalJSX.CrdsIcon & JSXBase.HTMLAttributes<HTMLCrdsIconElement>;
       'crds-image': LocalJSX.CrdsImage & JSXBase.HTMLAttributes<HTMLCrdsImageElement>;
       'crds-image-title-cutout': LocalJSX.CrdsImageTitleCutout & JSXBase.HTMLAttributes<HTMLCrdsImageTitleCutoutElement>;
+      'crds-instagram-feed': LocalJSX.CrdsInstagramFeed & JSXBase.HTMLAttributes<HTMLCrdsInstagramFeedElement>;
       'crds-label': LocalJSX.CrdsLabel & JSXBase.HTMLAttributes<HTMLCrdsLabelElement>;
       'crds-media-card': LocalJSX.CrdsMediaCard & JSXBase.HTMLAttributes<HTMLCrdsMediaCardElement>;
       'crds-modal': LocalJSX.CrdsModal & JSXBase.HTMLAttributes<HTMLCrdsModalElement>;
